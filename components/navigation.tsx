@@ -11,7 +11,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
           <Link href="/" className="flex items-center space-x-2">
             <span className="font-bold text-black dark:text-white">AI Fashion Assistant</span>
@@ -33,7 +33,6 @@ export function Navigation() {
         </div>
         <div className="flex items-center space-x-2">
           <ThemeToggle />
-          {/* ボタンのスタイルを直接指定 */}
           <Button variant="ghost" className="p-2 rounded-full">
             <ShoppingCart className="h-6 w-6 text-black dark:text-white" />
             <span className="sr-only">カート</span>
@@ -43,3 +42,4 @@ export function Navigation() {
     </header>
   );
 }
+

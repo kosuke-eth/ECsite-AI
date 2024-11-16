@@ -64,7 +64,7 @@ export default function ChatPage() {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const newMessages = [...messages, { role: "user", content: input }];
+    const newMessages: Message[] = [...messages, { role: "user", content: input }];
     setMessages(newMessages);
 
     try {
@@ -202,4 +202,6 @@ export default function ChatPage() {
     </div>
   );
 }
+
+
 

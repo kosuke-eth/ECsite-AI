@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navigation() {
@@ -33,7 +33,8 @@ export function Navigation() {
         </div>
         <div className="flex items-center space-x-2">
           <ThemeToggle />
-          <Button variant="ghost" size="icon">
+          {/* ボタンのスタイルを直接指定 */}
+          <Button variant="ghost" className="p-2 rounded-full">
             <ShoppingCart className="h-6 w-6 text-black dark:text-white" />
             <span className="sr-only">カート</span>
           </Button>

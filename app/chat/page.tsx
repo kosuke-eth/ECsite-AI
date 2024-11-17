@@ -7,6 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar } from "@/components/ui/avatar";
 import { Bot, Send, User } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
+import Link from "next/link";
+import Image from 'next/image';
 
 interface Message {
   role: "assistant" | "user";
@@ -19,6 +21,7 @@ interface Product {
   name: string;
   description: string;
   price: string;
+  link?: string;
 }
 
 export default function ChatPage() {
@@ -35,25 +38,31 @@ export default function ChatPage() {
 
   const recommendedProducts: Product[] = [
     {
-      id: "1",
-      imageUrl: "https://via.placeholder.com/150", // サンプル画像
-      name: "バーガンディ色のリブニット",
-      description: "デコルテを美しく見せるやや広めのネックライン。",
-      price: "¥5,000",
+      id: 1,
+      name: "ヘビーウェイトコットンジャージーTシャツ",
+      price: "¥9,000",
+      image: "https://images.lululemon.com/is/image/lululemon/LM3FBSS_0001_1?size=800,800",
+      category: "トップス",
+      description: "快適でスタイリッシュなオーバーサイズTシャツ。",
+      link: "https://www.lululemon.co.jp/ja-jp/p/%E3%83%98%E3%83%93%E3%83%BC%E3%82%A6%E3%82%A7%E3%82%A4%E3%83%88%E3%82%B3%E3%83%83%E3%83%84/151550617.html?&cid=ps_google_alwayson_lower_dm_jp-ja_a_na_google-pmax-do-always-on-q2june-fy23-na&gad_source=1&gclid=EAIaIQobChMIpPb9g4_iiQMVpgh7Bx1UCwtmEAQYAyABEgIBdfD_BwE&gclsrc=aw.ds",
     },
     {
-      id: "2",
-      imageUrl: "https://via.placeholder.com/150", // サンプル画像
-      name: "ダークブラウンのフレアスカート",
-      description: "動きに合わせて揺れるシルエットが魅力的なスカート。",
-      price: "¥8,000",
+      id: 2,
+      name: "オーガニックコットン12ozデニム",
+      price: "¥47,300",
+      image: "https://markaware.jp/cdn/shop/files/M24A-04PT23C_77-FRONT_3000x3000.jpg?v=1699250378",
+      category: "ボトムス",
+      description: "環境に優しいオーガニックコットンを使用したデニム。",
+      link: "https://markaware.jp/products/organic-cotton-12oz-denim-regular-fit-jeans-used-washed?variant=44102208094456&currency=JPY&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&gad_source=1&gclid=EAIaIQobChMIj4nzkYjiiQMVi8dMAh0OxxEcEAQYAiABEgIqFfD_BwE",
     },
     {
-      id: "3",
-      imageUrl: "https://via.placeholder.com/150", // サンプル画像
-      name: "ベージュのトレンチコート",
-      description: "少し肌寒い日に羽織れるクラシックなコート。",
-      price: "¥12,000",
+      id: 3,
+      name: "リネンブレザー",
+      price: "¥13,900",
+      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&h=500&fit=crop",
+      category: "アウター",
+      description: "軽量で通気性の良いリネン素材のブレザー。",
+      link: "https://japan.mango.com/commodity/SPUN0477D/MA1658EW32614/",
     },
   ];
 
@@ -187,14 +196,18 @@ export default function ChatPage() {
               key={product.id}
               className="border rounded-lg p-4 bg-white shadow-sm"
             >
-              <img
-                src={product.imageUrl}
-                alt={product.name}
-                className="w-full h-40 object-cover rounded-md mb-4"
-              />
-              <h4 className="font-semibold text-lg">{product.name}</h4>
-              <p className="text-sm text-gray-500">{product.description}</p>
+              <h4 className="font-semibold text-lg mt-4">{product.name}</h4>
+              <p className="text-sm text-gray-500 mb-2">{product.description}</p>
               <p className="font-bold text-primary mt-2">{product.price}</p>
+              {product.link ? (
+                <Link href={product.link} className="w-full">
+                  <Button className="w-full mt-4">商品を購入</Button>
+                </Link>
+              ) : (
+                <Button className="w-full mt-4" disabled>
+                  リンクがありません
+                </Button>
+              )}
             </div>
           ))}
         </div>

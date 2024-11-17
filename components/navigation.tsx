@@ -29,6 +29,14 @@ export function Navigation() {
             >
               AIチャット
             </Link>
+            <a
+              href="https://aa-4duuysp28-kosuke-eths-projects.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400"
+            >
+              Dressing AI
+            </a>
           </nav>
         </div>
         <div className="flex items-center space-x-2">
@@ -42,3 +50,4 @@ export function Navigation() {
     </header>
   );
 }
+

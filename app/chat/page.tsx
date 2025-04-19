@@ -10,13 +10,14 @@ import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import Image from "next/image";
 
+/* ------------------------------- types ------------------------------- */
 interface Message {
   role: "assistant" | "user";
   content: string;
 }
 
 interface Product {
-  id: string;          // ← ここを string に統一
+  id: string;          // ← 文字列に統一
   image: string;
   name: string;
   description: string;
@@ -25,8 +26,9 @@ interface Product {
   link?: string;
 }
 
+/* -------------------------------------------------------------------- */
 export default function ChatPage() {
-  /* ----------------------------- state ----------------------------- */
+  /* ------------------------------ state ----------------------------- */
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -34,13 +36,13 @@ export default function ChatPage() {
         "こんにちは！本日のファッションアドバイスをさせていただきます。お探しのアイテムや、ご要望をお聞かせください。",
     },
   ]);
-
   const [input, setInput] = useState("");
   const [userId, setUserId] = useState("");
+
   const API_KEY = "app-fpOLi0RCWEj8GgCnutj6go0a";
   const API_URL = "https://api.dify.ai/v1/chat-messages";
 
-  /* ---------------------- hard‑coded recommendations ---------------------- */
+  /* ------------------- static recommendations ---------------------- */
   const recommendedProducts: Product[] = [
     {
       id: "1",
@@ -76,12 +78,12 @@ export default function ChatPage() {
     },
   ];
 
-  /* ----------------------------- effects ----------------------------- */
+  /* ----------------------------- effects ---------------------------- */
   useEffect(() => {
     setUserId(uuidv4());
   }, []);
 
-  /* --------------------------- handlers --------------------------- */
+  /* --------------------------- handlers ---------------------------- */
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -134,19 +136,19 @@ export default function ChatPage() {
     setInput("");
   };
 
-  /* -------------------------- helpers -------------------------- */
+  /* ------------------------- helpers ------------------------- */
   const formatMessage = (content: string): string =>
     content
       .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
       .replace(/\*(.*?)\*/g, "<i>$1</i>")
       .replace(/\n/g, "<br />");
 
-  /* ----------------------------------------------------------------- */
+  /* --------------------------- UI --------------------------- */
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
         <div className="flex flex-col h-[600px]">
-          {/* ---------- header ---------- */}
+          {/* header */}
           <div className="p-4 border-b">
             <h2 className="text-2xl font-semibold">AIスタイリスト</h2>
             <p className="text-sm text-muted-foreground">
@@ -154,7 +156,7 @@ export default function ChatPage() {
             </p>
           </div>
 
-          {/* ---------- chat area ---------- */}
+          {/* chat area */}
           <ScrollArea className="flex-1 p-4">
             <div className="space-y-4">
               {messages.map((message, i) => (
@@ -189,7 +191,7 @@ export default function ChatPage() {
             </div>
           </ScrollArea>
 
-          {/* ---------- input ---------- */}
+          {/* input */}
           <div className="p-4 border-t">
             <div className="flex gap-2">
               <Input
@@ -206,7 +208,7 @@ export default function ChatPage() {
         </div>
       </div>
 
-      {/* ---------- recommendation cards ---------- */}
+      {/* recommendations */}
       <div className="mt-8">
         <h3 className="text-xl font-semibold mb-4">おすすめ商品</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -223,7 +225,9 @@ export default function ChatPage() {
                 className="object-cover rounded-lg"
               />
               <h4 className="font-semibold text-lg mt-4">{product.name}</h4>
-              <p className="text-sm text-gray-500 mb-2">{product.description}</p>
+              <p className="text-sm text-gray-500 mb-2">
+                {product.description}
+              </p>
               <p className="font-bold text-primary mt-2">{product.price}</p>
 
               {product.link ? (
@@ -242,3 +246,4 @@ export default function ChatPage() {
     </div>
   );
 }
+

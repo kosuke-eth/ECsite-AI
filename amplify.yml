@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Node のバージョンを Amplify が用意している 20 系に合わせる（任意）
+        # - nvm install 20
+        # - nvm use 20
+        - npm ci              # 依存関係をクリーンインストール
+    build:
+      commands:
+        - npm run build       # → next build
+        # └ package.json の "build": "next build" を想定
+  artifacts:
+    baseDirectory: .next      # SSR/ISR の成果物フォルダ
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*      # Next.js のビルドキャッシュ（任意）
